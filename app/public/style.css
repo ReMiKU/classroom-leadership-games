@@ -285,6 +285,9 @@ dialog p{font-size:16px}
 .slide-meta{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}
 .slide-badge{padding:5px 14px;border-radius:999px;background:var(--mint);color:var(--mint-ink);font-weight:900;font-size:12px;letter-spacing:.08em}
 .slide-badge.soon{background:var(--violet);color:var(--violet-ink)}
+.slide-badge.live{display:inline-flex;align-items:center;gap:8px;background:var(--red);color:var(--red-ink)}
+.slide-badge.live:before{content:'';width:8px;height:8px;border-radius:50%;background:var(--red-ink);animation:pulse 1.4s ease-in-out infinite}
+.slide-badge.final{background:var(--gold);color:var(--gold-ink)}
 .slide-title{font:400 clamp(48px,5vw,72px)/1 var(--display);margin:0 0 14px}
 .slide-mystery .slide-title{color:var(--soft)}
 .slide-copy>p{font-size:20px;line-height:1.5;max-width:480px;margin:0 0 18px}
