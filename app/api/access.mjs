@@ -1,11 +1,11 @@
 import { readFile } from 'node:fs/promises';
-import path from 'node:path';
 import { createAccessHandler } from '../lib/access.mjs';
 
 const handle=createAccessHandler({
   passcode:process.env.FACILITATOR_PASSCODE,
   secret:process.env.FACILITATOR_SESSION_SECRET,
-  loadFacilitator:()=>readFile(path.join(process.cwd(),'.private','facilitator-app.mjs'),'utf8')
+  // Resolve from this file, not process.cwd(): Git deployments with a Root Directory run from the repository root.
+  loadFacilitator:()=>readFile(new URL('../.private/facilitator-app.mjs',import.meta.url),'utf8')
 });
 
 async function dispatch(request) {
