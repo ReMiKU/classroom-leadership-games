@@ -10,7 +10,7 @@ These are original editable SVG sketches adapted from the user-requested `ian-xi
 
 Each SVG is 960 × 540, with a white background, sparse dark lines, black figures with white eyes, and limited coloured annotations. The figures perform the action rather than decorate it.
 
-The standalone `../../summit-how-to-play-draft.html` embeds all three SVGs as data URLs and works without a network or adjacent files. The separate SVG files can be reused in an eventual how-to-play page. The companion Markdown contains the full draft rule text.
+The separate SVG files can be reused in an eventual how-to-play page. The full guide drafts are maintained privately.
 
 ## Verification
 

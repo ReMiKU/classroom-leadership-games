@@ -20,6 +20,6 @@ Open <http://127.0.0.1:4173>. Local facilitator access requires private credenti
 
 Run the existing checks with `npm test` from `app/`.
 
-The top-level Markdown and HTML files contain activity plans and guide drafts. `assets/` contains supporting illustrations and their source notes.
+`game-walkthrough.md` contains earlier activity plans. `assets/` contains supporting illustrations and their source notes.
 
 For Vercel, set the project root directory to `app`. Local credentials, environment files, saved classroom sessions, screenshots, and installed dependencies are excluded from Git.

@@ -56,7 +56,7 @@ When mirroring one screen, the class sees facilitator entry controls. Enter colo
 - Timer expiry does not submit, reveal or choose on anyone’s behalf.
 - Undo restores the latest round and reopens its choices. Undoing while a new round is unscored replaces that round’s draft choices, with confirmation.
 
-The original `leadership-activities-handoff.md` and `game-walkthrough.md` describe earlier game rules. This prototype implements the later minority-wins variant agreed in conversation.
+`game-walkthrough.md` describes earlier game rules. This prototype implements the later minority-wins variant.
 
 ### Final-score knockout
 
