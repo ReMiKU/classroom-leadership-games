@@ -44,6 +44,7 @@ import { followGame } from './live-sync.mjs';
 const KEY='leadership-lab-redblue-v1-projector-v2';
 const isDisplay=true;
 let state=null;
+const expandedTeams=new Set();
 const route=()=>['board','history','guide','home'].includes(location.hash.slice(1))?location.hash.slice(1):(new URLSearchParams(location.search).has('display')?'board':'home');
 const escape=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const signed=n=>n>0?'+'+n:String(n);
@@ -54,7 +55,7 @@ const result=()=>state.choices.every(Boolean)?outcome(state.choices,state.champi
 const remaining=()=>state.timer.deadline?Math.max(0,Math.ceil((state.timer.deadline-Date.now())/1000)):state.timer.remaining;
 const clockText=()=>Math.floor(remaining()/60)+':'+String(remaining()%60).padStart(2,'0');
 ${publicHeader.toString().replace('function publicHeader','function header')}
-${['board','finalSummary','finalRepresentative','finalTiebreakStage','splitBanner','teamCard','calculation','championStage','debrief'].map(extract).join('\n\n')}
+${['board','finalSummary','finalRepresentative','finalTiebreakStage','splitBanner','teamCard','toggleTeam','calculation','championStage','debrief'].map(extract).join('\n\n')}
 ${extract('home').replace(/const inProgress=.*?;/,'const inProgress=false;')}
 ${extract('guide').replace('Enter 2–12 teams, add members if useful, and choose your session length.','The facilitator opens Manage, enters the passcode, then adds teams and chooses the session length.')}
 ${publicHistory.toString().replace('function publicHistory','function history')}
@@ -66,6 +67,7 @@ const connection=document.createElement('div');connection.className='sync-status
 connection.textContent='Connecting to the shared game…';
 followGame(receive,(message,error=false)=>{connection.textContent=message;connection.classList.toggle('sync-error',error);});
 window.addEventListener('hashchange',()=>{render();window.scrollTo(0,0);});
+document.addEventListener('click',event=>{const toggle=event.target.closest('[data-team-toggle]');if(toggle)toggleTeam(toggle);});
 document.addEventListener('click',async event=>{if(event.target.closest('[data-action="fullscreen"]')){if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen();}});
 setInterval(()=>{if(!state)return;document.querySelectorAll('.clock').forEach(el=>el.textContent=clockText());},250);
 render();

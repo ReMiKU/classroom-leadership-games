@@ -77,6 +77,8 @@ nav a.active{background:var(--gold);color:var(--gold-ink);font-weight:900}
 .choice-blue{box-shadow:inset 0 0 0 3px var(--blue),0 0 28px rgba(69,180,255,.25)}
 .choice-red:before,.choice-blue:before{content:'';position:absolute;left:0;right:0;top:0;height:10px;background:var(--red)}
 .choice-blue:before{background:var(--blue)}
+.team-summary{position:relative}
+.team-toggle{display:none}
 .team-heading{display:flex;gap:12px;align-items:center;min-height:40px}
 .team-index{font:400 17px/1 var(--display);width:40px;height:40px;flex-shrink:0;display:grid;place-items:center;border-radius:12px;background:var(--panel-2);color:var(--gold)}
 .team-heading h2{font:400 26px/1.1 var(--display);margin:0;overflow-wrap:anywhere}
@@ -433,6 +435,30 @@ a.library-card:hover{transform:translateY(-4px);box-shadow:0 0 0 3px var(--gold)
 }
 
 @media(max-width:560px){.brand,.hub-brand{font-size:19px;gap:8px}
+/* Phones: compact team cards, three to a row, so the whole class fits on screen. Tapping a card opens it full width. */
+.team-grid,.projector .team-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.team-card,.projector .team-card{min-height:0;padding:12px;border-radius:18px}
+.choice-red,.choice-blue{padding-top:18px}
+.choice-red:before,.choice-blue:before{height:6px}
+.team-toggle{display:block;position:absolute;inset:-12px -12px 0;min-height:0;padding:0;border:0;border-radius:18px 18px 0 0;background:transparent}
+.choice-red .team-toggle,.choice-blue .team-toggle{top:-18px}
+.team-toggle:hover{background:transparent}
+.team-toggle:focus-visible{outline-offset:-3px}
+.team-toggle svg{position:absolute;top:12px;right:8px;width:18px;height:18px;fill:none;stroke:var(--muted);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s}
+.choice-red .team-toggle svg,.choice-blue .team-toggle svg{top:18px}
+.team-card.open{grid-column:1/-1}
+.team-card.open .team-heading{padding-right:26px}
+.team-card.open .team-toggle svg{transform:rotate(180deg)}
+.team-card:not(.open) .team-heading{flex-wrap:wrap;gap:6px;min-height:0;padding-right:18px}
+.team-card:not(.open) .team-index{width:28px;height:28px;font-size:13px;border-radius:9px}
+.team-card:not(.open) .leader-crown{order:1;width:20px;height:17px}
+.team-card:not(.open) .team-heading h2,.projector .team-card:not(.open) .team-heading h2{order:2;flex-basis:100%;font-size:17px}
+.team-card:not(.open) .choice-badge,.team-card:not(.open) .score-line>span,.team-card:not(.open) .members,.team-card:not(.open) .waiting{display:none}
+.team-card:not(.open) .score-line{margin:6px 0 0}
+.team-card:not(.open) .score-line>strong,.projector .team-card:not(.open) .score-line>strong{font-size:34px}
+.team-card:not(.open) .choice-controls{gap:6px;margin-top:8px}
+.team-card:not(.open) .choose{min-height:44px;padding:4px}
+.team-card:not(.open) .choose span{display:none}
 .lab-logo{width:36px;height:36px}
 .hub-topbar>.button{font-size:13px;padding:8px 12px}
 .library-card{grid-template-columns:minmax(0,1fr)}
@@ -444,8 +470,6 @@ a.library-card:hover{transform:translateY(-4px);box-shadow:0 0 0 3px var(--gold)
 
 @media(max-width:480px){h1{font-size:38px}
 .eyebrow{font-size:11px}
-.team-grid,.projector .team-grid{grid-template-columns:1fr}
-.team-card{min-height:0}
 .board-intro{gap:12px}
 .timer-box{width:104px;height:104px;border-width:6px}
 .timer-box .eyebrow,.timer-caption{display:none}

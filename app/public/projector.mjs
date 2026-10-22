@@ -3,6 +3,7 @@ import { followGame } from './live-sync.mjs';
 const KEY='leadership-lab-redblue-v1-projector-v2';
 const isDisplay=true;
 let state=null;
+const expandedTeams=new Set();
 const route=()=>['board','history','guide','home'].includes(location.hash.slice(1))?location.hash.slice(1):(new URLSearchParams(location.search).has('display')?'board':'home');
 const escape=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const signed=n=>n>0?'+'+n:String(n);
@@ -73,10 +74,19 @@ function teamCard(t,i) {
   // Crown a unique leader only; tied leaders stay unmarked so nobody looks like a shared winner.
   const top=Math.max(...state.teams.map(team=>team.score));
   const leader=t.score===top&&state.teams.filter(team=>team.score===top).length===1;
-  return `<article class="team-card ${show&&choice?`choice-${choice}`:''}"><div class="team-heading"><span class="team-index">${teamNumber(i)}</span><h2>${escape(t.name)}</h2>${leader?'<svg class="leader-crown" viewBox="0 0 24 20" role="img" aria-label="Current leader"><path d="M2 6l5 5 5-9 5 9 5-5-2 13H4z"/></svg>':''}${show?`<span class="choice-badge ${choice}">${choice==='red'?'R · RED':'B · BLUE'}</span>`:''}</div>
-  <div class="score-line"><strong>${t.score}</strong><span>points</span>${delta!==null&&delta!==undefined?`<span class="score-delta ${delta>0?'positive':delta<0?'negative':'neutral'}">${signed(delta)} this round</span>`:''}</div>
+  const open=expandedTeams.has(i);
+  return `<article class="team-card ${show&&choice?`choice-${choice}`:''}${open?' open':''}"><div class="team-summary"><div class="team-heading"><span class="team-index">${teamNumber(i)}</span><h2>${escape(t.name)}</h2>${leader?'<svg class="leader-crown" viewBox="0 0 24 20" role="img" aria-label="Current leader"><path d="M2 6l5 5 5-9 5 9 5-5-2 13H4z"/></svg>':''}${show?`<span class="choice-badge ${choice}">${choice==='red'?'R · RED':'B · BLUE'}</span>`:''}</div>
+  <div class="score-line"><strong>${t.score}</strong><span>points</span>${delta!==null&&delta!==undefined?`<span class="score-delta ${delta>0?'positive':delta<0?'negative':'neutral'}">${signed(delta)} this round</span>`:''}</div><button class="team-toggle" data-team-toggle="${i}" aria-expanded="${open}" aria-label="${escape(t.name)} details"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button></div>
   <p class="members">${t.members.length?escape(t.members.join(' · ')):'Members can be added in setup'}</p>
   ${phaseEditable?`<div class="choice-controls" role="group" aria-label="${escape(t.name)} choice"><button class="choose red ${choice==='red'?'selected':''}" data-action="choose" data-index="${i}" data-colour="red" aria-pressed="${choice==='red'}">R <span>Red</span></button><button class="choose blue ${choice==='blue'?'selected':''}" data-action="choose" data-index="${i}" data-colour="blue" aria-pressed="${choice==='blue'}">B <span>Blue</span></button></div>`:!show?`<div class="waiting"><span class="status-dot"></span>${isDisplay?'Choice hidden':state.phase==='record'?'Recording choices':'Waiting for the reveal'}</div>`:''}</article>`;
+}
+
+function toggleTeam(button) {
+  const i=Number(button.dataset.teamToggle);
+  const open=!expandedTeams.has(i);
+  if(open) expandedTeams.add(i); else expandedTeams.delete(i);
+  button.setAttribute('aria-expanded',String(open));
+  button.closest('.team-card').classList.toggle('open',open);
 }
 
 function calculation() {
@@ -165,6 +175,7 @@ const connection=document.createElement('div');connection.className='sync-status
 connection.textContent='Connecting to the shared game…';
 followGame(receive,(message,error=false)=>{connection.textContent=message;connection.classList.toggle('sync-error',error);});
 window.addEventListener('hashchange',()=>{render();window.scrollTo(0,0);});
+document.addEventListener('click',event=>{const toggle=event.target.closest('[data-team-toggle]');if(toggle)toggleTeam(toggle);});
 document.addEventListener('click',async event=>{if(event.target.closest('[data-action="fullscreen"]')){if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen();}});
 setInterval(()=>{if(!state)return;document.querySelectorAll('.clock').forEach(el=>el.textContent=clockText());},250);
 render();

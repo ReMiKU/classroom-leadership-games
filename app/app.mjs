@@ -18,6 +18,7 @@ try {
 
 const channel = 'BroadcastChannel' in window ? new BroadcastChannel(KEY) : null;
 let setupDraft = null;
+const expandedTeams = new Set(); // Team cards opened on phones; kept across live re-renders.
 const escape = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const signed = n => n > 0 ? `+${n}` : String(n);
 const teamNumber = i => String(i+1).padStart(2,'0');
@@ -129,10 +130,20 @@ function teamCard(t,i) {
   // Crown a unique leader only; tied leaders stay unmarked so nobody looks like a shared winner.
   const top=Math.max(...state.teams.map(team=>team.score));
   const leader=t.score===top&&state.teams.filter(team=>team.score===top).length===1;
-  return `<article class="team-card ${show&&choice?`choice-${choice}`:''}"><div class="team-heading"><span class="team-index">${teamNumber(i)}</span><h2>${escape(t.name)}</h2>${leader?'<svg class="leader-crown" viewBox="0 0 24 20" role="img" aria-label="Current leader"><path d="M2 6l5 5 5-9 5 9 5-5-2 13H4z"/></svg>':''}${show?`<span class="choice-badge ${choice}">${choice==='red'?'R · RED':'B · BLUE'}</span>`:''}</div>
-  <div class="score-line"><strong>${t.score}</strong><span>points</span>${delta!==null&&delta!==undefined?`<span class="score-delta ${delta>0?'positive':delta<0?'negative':'neutral'}">${signed(delta)} this round</span>`:''}</div>
+  const open=expandedTeams.has(i);
+  return `<article class="team-card ${show&&choice?`choice-${choice}`:''}${open?' open':''}"><div class="team-summary"><div class="team-heading"><span class="team-index">${teamNumber(i)}</span><h2>${escape(t.name)}</h2>${leader?'<svg class="leader-crown" viewBox="0 0 24 20" role="img" aria-label="Current leader"><path d="M2 6l5 5 5-9 5 9 5-5-2 13H4z"/></svg>':''}${show?`<span class="choice-badge ${choice}">${choice==='red'?'R · RED':'B · BLUE'}</span>`:''}</div>
+  <div class="score-line"><strong>${t.score}</strong><span>points</span>${delta!==null&&delta!==undefined?`<span class="score-delta ${delta>0?'positive':delta<0?'negative':'neutral'}">${signed(delta)} this round</span>`:''}</div><button class="team-toggle" data-team-toggle="${i}" aria-expanded="${open}" aria-label="${escape(t.name)} details"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button></div>
   <p class="members">${t.members.length?escape(t.members.join(' · ')):'Members can be added in setup'}</p>
   ${phaseEditable?`<div class="choice-controls" role="group" aria-label="${escape(t.name)} choice"><button class="choose red ${choice==='red'?'selected':''}" data-action="choose" data-index="${i}" data-colour="red" aria-pressed="${choice==='red'}">R <span>Red</span></button><button class="choose blue ${choice==='blue'?'selected':''}" data-action="choose" data-index="${i}" data-colour="blue" aria-pressed="${choice==='blue'}">B <span>Blue</span></button></div>`:!show?`<div class="waiting"><span class="status-dot"></span>${isDisplay?'Choice hidden':state.phase==='record'?'Recording choices':'Waiting for the reveal'}</div>`:''}</article>`;
+}
+
+// On phones the board shows compact cards; tapping one expands it in place without a full re-render.
+function toggleTeam(button) {
+  const i=Number(button.dataset.teamToggle);
+  const open=!expandedTeams.has(i);
+  if(open) expandedTeams.add(i); else expandedTeams.delete(i);
+  button.setAttribute('aria-expanded',String(open));
+  button.closest('.team-card').classList.toggle('open',open);
 }
 
 function calculation() {
@@ -212,7 +223,9 @@ async function confirmAction(title,copy) {
 }
 
 document.addEventListener('click',async e=>{
-  const button=e.target.closest('[data-action]');if(!button||button.disabled)return;
+  const button=e.target.closest('[data-action]');
+  if(!button) {const toggle=e.target.closest('[data-team-toggle]');if(toggle)toggleTeam(toggle);return;}
+  if(button.disabled)return;
   const action=button.dataset.action;
   if(isDisplay&&action!=='fullscreen')return;
   try {
