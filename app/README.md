@@ -2,7 +2,9 @@
 
 Live: [Leadership Lab](https://classroom-leadership-games.vercel.app/#home)
 
-A facilitator-led classroom game collection. The home page offers **Red / Blue**, using the revised **smaller side wins** rules, and a clearly labelled slot for an undecided second activity. Plain HTML, CSS and JavaScript run the game locally in the browser. A small Vercel Function validates the facilitator passcode and serves the private controller after authentication.
+A facilitator-led classroom game collection. The home page offers **Red / Blue**, using the revised **smaller side wins** rules, and a clearly labelled slot for an undecided second activity.
+
+The look is a dark "game show" theme (Lilita One and Nunito from Google Fonts). The home page carries the Leadership Lab dice logo; game pages keep the Red / Blue mark. Featured games rotate in a spotlight carousel every seven seconds. It pauses while hovered or focused, once a visitor picks a slide, or with its pause button, and starts paused for visitors who prefer reduced motion. To feature a new game, add a slide to `slides` in `home()` in `app.mjs`; the dots and arrows appear automatically when there is more than one slide. Plain HTML, CSS and JavaScript run the game locally in the browser. A small Vercel Function validates the facilitator passcode and serves the private controller after authentication.
 
 ## Facilitator passcode
 

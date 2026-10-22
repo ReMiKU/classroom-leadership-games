@@ -1,6 +1,6 @@
 import { readFile, writeFile, mkdir, copyFile } from 'node:fs/promises';
 import path from 'node:path';
-import { publicHeader, privateHeader, publicHistory, publicRender } from './navigation-renderers.mjs';
+import { publicHeader, privateHeader, publicHistory, publicRender, publicSpotlight } from './navigation-renderers.mjs';
 
 const root=process.cwd();
 const original=await readFile(path.join(root,'app.mjs'),'utf8');
@@ -55,11 +55,13 @@ const remaining=()=>state.timer.deadline?Math.max(0,Math.ceil((state.timer.deadl
 const clockText=()=>Math.floor(remaining()/60)+':'+String(remaining()%60).padStart(2,'0');
 ${publicHeader.toString().replace('function publicHeader','function header')}
 ${['board','finalSummary','finalRepresentative','finalTiebreakStage','splitBanner','teamCard','calculation','championStage','debrief'].map(extract).join('\n\n')}
-${extract('home').replace(/const inProgress=.*?;/,'const inProgress=false;').replace('Sessions are saved in this browser.','The facilitator’s session is shared live online.')}
+${extract('home').replace(/const inProgress=.*?;/,'const inProgress=false;')}
 ${extract('guide').replace('Enter 2–12 teams, add members if useful, and choose your session length.','The facilitator opens Manage, enters the passcode, then adds teams and chooses the session length.')}
 ${publicHistory.toString().replace('function publicHistory','function history')}
 ${publicRender.toString().replace('function publicRender','function render')}
 function receive(next){state=next;render();}
+${publicSpotlight.toString().replace('function publicSpotlight','function startSpotlight')}
+const showSpotlight=startSpotlight();
 const connection=document.createElement('div');connection.className='sync-status';connection.setAttribute('role','status');document.body.append(connection);
 connection.textContent='Connecting to the shared game…';
 followGame(receive,(message,error=false)=>{connection.textContent=message;connection.classList.toggle('sync-error',error);});
