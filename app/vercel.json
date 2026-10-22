@@ -1,0 +1,11 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "buildCommand": "",
+  "installCommand": "npm ci --omit=dev",
+  "outputDirectory": "public",
+  "cleanUrls": false,
+  "functions": {
+    "api/access.mjs": { "includeFiles": ".private/facilitator-app.mjs" }
+  }
+}

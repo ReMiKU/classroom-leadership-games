@@ -1,0 +1,16 @@
+server.mjs
+game.test.mjs
+*.md
+*-preview.png
+deployment*.json
+.git
+.vercel
+.env*
+node_modules
+scripts
+lib/*.test.mjs
+.facilitator-*
+/app.mjs
+/style.css
+/index.html
+/assets

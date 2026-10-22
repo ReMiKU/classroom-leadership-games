@@ -1,0 +1,12 @@
+{
+  "name": "classroom-leadership-games",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node server.mjs",
+    "test": "node --test game.test.mjs lib/*.test.mjs"
+  },
+  "dependencies": {
+    "@vercel/blob": "2.7.0"
+  }
+}

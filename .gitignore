@@ -1,0 +1,9 @@
+node_modules/
+.vercel/
+.env*
+.facilitator-*
+*.log
+.DS_Store
+Thumbs.db
+.local-only/
+*-preview.png

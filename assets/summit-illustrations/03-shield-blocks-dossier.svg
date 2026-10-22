@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+<title id="title">Defence blocks an espionage operation</title><desc id="desc">One black figure pushes a dossier towards a rival. The rival braces an oversized shield; the dossier cannot get through.</desc>
+<rect width="960" height="540" fill="white"/>
+<g stroke="#242824" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none">
+<path d="M219 403 Q453 406 724 401"/>
+<path d="M311 290 Q356 276 393 306 M318 309 Q350 312 390 323"/>
+<path d="M391 280 L437 281 L447 294 L493 295 L492 356 L389 351 Z" fill="white"/>
+<path d="M401 306 L472 310 M400 318 L465 322 M400 333 L444 335" stroke="#888"/>
+<path d="M554 206 Q588 226 638 232 Q640 343 578 383 Q521 347 517 243 Q539 230 554 206 Z" fill="white"/>
+<path d="M555 222 Q586 239 623 244 Q624 332 578 365 Q535 335 532 250 Z" stroke="#426786"/>
+<path d="M576 250 L579 330 M548 275 L607 279" stroke="#426786"/>
+<path d="M663 287 L632 291 M663 306 L631 317"/>
+<path d="M285 348 L270 397 L254 400 M309 349 L324 396 L341 400 M670 349 L650 396 L632 399 M692 347 L711 396 L730 399"/>
+<path d="M495 310 l13 -7 M495 324 l14 2 M493 336 l13 10" stroke="#a24436"/>
+</g>
+<path d="M266 279 Q267 253 293 254 Q319 255 324 282 L327 330 Q320 354 289 354 Q264 351 262 332 Z" fill="#171b17"/>
+<path d="M657 278 Q661 251 685 252 Q711 254 712 280 L715 328 Q706 353 676 353 Q655 351 651 332 Z" fill="#171b17"/>
+<g fill="white"><circle cx="300" cy="279" r="3"/><circle cx="313" cy="280" r="3"/><circle cx="662" cy="278" r="3"/><circle cx="675" cy="277" r="3"/></g>
+<g font-family="'Segoe Print','Comic Sans MS',cursive" font-size="22"><text x="259" y="203" fill="#252925" transform="rotate(-3 259 203)">a secret operation…</text><text x="647" y="195" fill="#426786" transform="rotate(3 647 195)">…a prepared country.</text><text x="436" y="438" fill="#a24436" font-size="20">BLOCKED</text></g>
+<path d="M331 215 Q367 224 402 264 M402 264 l-10 -4 M402 264 l-1 -11" stroke="#b9693b" stroke-width="2" fill="none" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+<title id="title">Your group becomes a country</title><desc id="desc">Two serious black figures carry a small island onto a country nameplate. A flag gives the island its identity.</desc>
+<rect width="960" height="540" fill="white"/>
+<g stroke="#222622" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none">
+<path d="M238 394 Q442 399 704 393"/>
+<path d="M306 350 L627 345 L659 393 L287 394 Z"/>
+<path d="M321 359 L612 357 M309 381 Q458 377 630 379" stroke="#ddd"/>
+<path d="M342 230 L360 212 L398 218 L430 200 L466 207 L483 192 L524 205 L552 201 L568 227 L603 239 L582 261 L554 269 L525 291 L482 282 L456 298 L425 282 L389 289 L368 265 L339 256 Z" fill="#fff"/>
+<path d="M339 256 L357 289 L387 305 L424 312 L457 331 L482 312 L520 319 L554 300 L581 282 L603 239"/>
+<path d="M387 305 L389 289 M457 331 L456 298 M520 319 L525 291 M554 300 L554 269"/>
+<path d="M393 244 L417 223 L436 246 M416 229 L419 247 M520 246 Q535 231 551 245" stroke="#999"/>
+<path d="M479 228 L476 127 L538 139 L479 160"/>
+<path d="M486 136 L519 143 L486 153" stroke="#ad6040"/>
+<path d="M294 274 Q313 285 347 268 M301 290 Q319 304 359 288"/>
+<path d="M650 276 Q628 285 591 270 M649 293 Q622 310 577 294"/>
+<path d="M269 329 L261 384 L245 388 M294 333 L305 381 L320 385 M655 331 L642 383 L628 386 M682 326 L694 382 L711 384"/>
+</g>
+<path d="M253 271 Q250 247 274 244 Q302 240 308 266 L314 314 Q303 345 270 337 Q251 333 250 311 Z" fill="#171a17"/>
+<path d="M643 267 Q646 243 672 246 Q696 247 696 276 L697 314 Q689 340 662 339 Q640 336 637 316 Z" fill="#171a17"/>
+<g fill="white"><circle cx="284" cy="266" r="3.2"/><circle cx="296" cy="267" r="3.2"/><circle cx="650" cy="266" r="3.2"/><circle cx="662" cy="266" r="3.2"/></g>
+<g font-family="'Segoe Print','Comic Sans MS',cursive" fill="#252925" font-size="22"><text x="408" y="382" transform="rotate(-1 408 382)">OUR COUNTRY</text><text x="587" y="160" fill="#426786" font-size="21">one group, one flag</text></g>
+<path d="M595 175 Q565 193 531 177 M531 177 l11 0 M531 177 l7 9" stroke="#426786" fill="none" stroke-width="2" stroke-linecap="round"/>
+<path d="M191 320 q-15 17 -9 35 M183 355 l-6 -7 M183 355 l7 -5" stroke="#b9693b" stroke-width="2" fill="none" stroke-linecap="round"/>
+</svg>
